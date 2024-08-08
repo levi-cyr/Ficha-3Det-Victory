@@ -1,0 +1,839 @@
+body {
+    /*    background-image: url(/img/chrono-trigger-wallpapers.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+*/
+    background-color: white;
+    padding: 0px 0px 50px 0px;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.navbar {
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+/* Picture related (start) */
+#picture_input {
+    display: none;
+}
+
+.picture {
+    float: left;
+    margin-right: 50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background: #ddd;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(65, 65, 65, 0.3);
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+    outline: none;
+    overflow: hidden;
+}
+
+.picture:hover {
+    color: #777;
+    background: #ccc;
+    box-shadow: 0 0 10px rgba(65, 65, 65, 0.3);
+    /*cursor: url("/cursor/LINKSELECT.cur"), pointer; */
+}
+
+.picture:active {
+    border-color: black;
+    color: black;
+    background: #eee;
+    cursor: url("/cursor/LINKSELECT.cur"), pointer;
+}
+
+.picture:focus {
+    color: #777;
+    background: #ccc;
+    box-shadow: 0 0 10px rgba(65, 65, 65, 0.3);
+}
+
+.picture_img {
+    width: 200px;
+    height: 200px;
+    /*cursor: url("/cursor/LINKSELECT.cur"), pointer; */
+}
+
+/* Picture related (end) */
+
+/* bio (Inicio) */
+#bio {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+}
+
+#bio>.top-row {
+    display: flex;
+    align-items: center;
+}
+
+#inputNomeBio {
+    /*color: white;*/
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    width: 200px;
+    height: 50px;
+    margin: 0px 10px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.ptsXP {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    /*color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);*/
+    /*color: white;*/
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+    margin: 0px 10px;
+    font-size: large;
+}
+
+.ptsXPTitle {
+    /*color: white;*/
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Bio (final) */
+
+.periciaTitulo {
+    justify-content: center;
+    width: 400px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: x-large;
+}
+
+.periciaDescricao {
+    display: none;
+}
+
+
+/*inventario (inicio) */
+.botaoInventario {
+    color: black;
+    font-size: x-large;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.blocoAbaixoBio {
+    display: flex;
+    margin-left: 10px;
+}
+
+.add-button {
+    color: black;
+    font-size: large;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+
+.inventarioTitulo {
+    justify-content: center;
+    width: 400px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: x-large;
+}
+
+.inventarioDescricao {
+    justify-content: center;
+    height: 150px;
+    width: 400px;
+    margin-left: 10px;
+    border: transparent;
+    border-radius: 5px;
+    background-color: #ddd;
+    font-size: large
+}
+
+/* inventario (final) 
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    width: 200px;
+    height: 50px;
+    margin: 0px 10px;
+    font-size: large;
+    font-weight: bold;
+*/
+
+/*arquetipo, poderes e kits (inicio) */
+
+#ptsTituloArquetipo,
+#ptsTituloKit,
+#ptsTitulo {
+    justify-content: center;
+    text-align: center;
+    width: 60px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+    font-size: x-large;
+}
+
+#botaoArquetipoPoderesKit {
+    color: black;
+    font-size: x-large;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    float: right;
+}
+
+.arquetipoPoderesKitTitulo {
+    justify-content: center;
+    width: 300px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: x-large;
+}
+
+.arquetipoPoderesKitDescricao {
+    justify-content: center;
+    height: 150px;
+    width: 400px;
+    margin-left: 10px;
+    border: transparent;
+    border-radius: 5px;
+    background-color: #ddd;
+    font-size: large
+}
+
+/* arquetipo, poderes e kits (final) */
+
+/* Anotações*/
+
+.ql-toolbar {
+    border-radius: 5px;
+    width: 744px;
+    margin-bottom: 10px;
+}
+
+.ql-container {
+    width: 744px;
+    height: 460px;
+    border: transparent;
+    border-radius: 5px;
+    background-color: #ddd;
+    font-size: medium;
+}
+
+/* 
+#inputAnotacoes {
+    width: 744px;
+    height: 446px;
+    border: transparent;
+    border-radius: 5px;
+    background-color: #ddd;
+    font-size: x-large;
+}
+    */
+
+/* Anotações (final)*/
+
+/* Recursos (inicio) */
+#poderRecurso {
+    margin-right: 10px;
+}
+
+#habilidadeRecurso {
+    margin: 0px 10px 0px 10px;
+}
+
+#resistenciaRecurso {
+    margin: 0px 10px 0px 10px;
+}
+
+.poderHabRes {
+    /*margin: 0px 0px 0px 10px;
+    /*color: white;*/
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    padding: 0;
+}
+
+.divRecursos {
+    display: flex;
+    align-items: center;
+    margin: 8px 0px 0px 0px;
+}
+
+.recursos {
+    align-items: center;
+    width: 70px;
+    /*color: var(--bs-body-color);*/
+    /*color: white;*/
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+.recursoInput {
+    text-align: center;
+    width: 50px;
+    /*color: var(--bs-body-color);*/
+    /*background-color: var(--bs-body-bg);*/
+    /*color: white;*/
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+    font-size: small;
+    font-weight: bold;
+}
+
+.form-control::placeholder {
+    color: rgba(117, 117, 117, 255);
+    font-size: smaller;
+    opacity: 1;
+}
+
+/* Recursos (fim) */
+
+/* Botão de aumentar e abaixar*/
+
+.botaoAumentar {
+    /*margin: 0px 10px 0px 0px;
+    /*color: white;*/
+    font-size: small;
+    cursor: pointer;
+}
+
+.botaoAbaixar {
+    /*color: white;*/
+    font-size: small;
+    cursor: pointer;
+}
+
+/* Botão de aumentar e abaixar (fim) */
+
+/* Esconder setas (inicio) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox 
+input[type=number] {
+  -moz-appearance: textfield;
+}
+*/
+
+/* Esconder setas (final) */
+
+/* Barras de recursos (inicio) */
+.bar-container {
+    height: 10px;
+    width: 100px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+}
+
+.red {
+    background-color: rgb(127, 194, 64);
+}
+
+.blue {
+    background-color: rgb(132, 132, 255);
+}
+
+.yellow {
+    background-color: rgb(226, 205, 17);
+}
+
+/* Barras de recursos (final) */
+#save,
+#load {
+    cursor: pointer;
+}
+
+#load-btn {
+    display: none;
+}
+
+
+.tab {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+}
+
+.tablinks {
+    color: rgba(33, 37, 41, 255);
+    background-color: #ddd;
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.tablinks:hover {
+    color: #777;
+    background: #ccc;
+    box-shadow: 0 0 10px rgba(65, 65, 65, 0.3);
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+}
+
+.tabcontent {
+    display: none;
+}
+
+/*Vantagens (Inicio)*/
+
+.divVantagens,
+.divDesvantagens {
+    margin: 0 10px 0 10px;
+}
+
+.vantagemContainer {
+    margin: 0 10px 0 10px;
+}
+
+.ptsVantagem,
+.ptsDesvantagem {
+    float: right;
+    justify-content: center;
+    text-align: center;
+    width: 50px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+.vantagemTitulo,
+.desvantagemTitulo {
+    width: 220px;
+    color: black;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: x-large;
+}
+
+.vantagemDescricao,
+.desvantagemDescricao {
+    height: 180px;
+    width: 300px;
+    color: black;
+    border: transparent;
+    border-radius: 5px;
+    background-color: #ddd;
+    font-size: x-large;
+    font-size: large;
+    resize: none;
+}
+
+#vantagensAba {
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#desvantagensAba {
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+/*Vantagens (final)*/
+
+/*Tecnicas (inicio)*/
+.divTecnicas {
+    margin: 0 10px 0 10px;
+}
+
+.tecnicaTitulo,
+.tecnicaRequisitos,
+.tecnicaAlcance,
+.tecnicaCusto,
+.tecnicaDuracao {
+    width: 195px;
+    color: black;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size:large;
+}
+
+.tecnicaDescricao {
+    height: 180px;
+    width: 300px;
+    color: black;
+    border: transparent;
+    border-radius: 5px;
+    background-color: #ddd;
+    font-size:large;
+    resize: none;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.tecnicaContainer {
+    margin: 0 10px 0 10px;
+}
+
+#tecnicasAba {
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.ptsTecnicas {
+    float: right;
+    justify-content: center;
+    text-align: center;
+    width: 70px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+    font-size:large;
+    margin-bottom: 20px;
+}
+
+/*Tecnicas (final)*/
+
+/*Desvantagens (Inicio)*/
+
+
+
+
+.desvantagemContainer {
+    margin: 0 10px 0 10px;
+}
+
+
+/*Desvantagens (final)*/
+
+/*Vantagens e desvantagens do arquetipo (inicio)*/
+
+.vantagemArquetipoContainer,
+.desvantagemArquetipoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.vantagemArquetipoTitulo,
+.desvantagemArquetipoTitulo,
+.exigenciaArquetipoTitulo,
+.poderesKitTitulo {
+    width: 350px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: x-large;
+}
+
+.vantagemArquetipoDescricao,
+.desvantagemArquetipoDescricao {
+    display: none;
+}
+
+/*Vantagens e desvantagens do arquetipo (final)*/
+
+.kitButton {
+    display: flex;
+    align-items: center;
+}
+
+
+/*Exigencias e poderes do kit(inicio)*/
+
+.exigenciasKitContainer,
+.poderesKitContainer {
+    display: flex;
+    align-items: center;
+}
+
+.exigenciasKitTitulo {
+    justify-content: center;
+    width: 350px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: x-large;
+    display: flex;
+}
+
+.exigenciasKitDescricao {
+    display: none;
+}
+
+.poderesKitTitulo {
+    justify-content: center;
+    width: 350px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: x-large;
+    display: flex;
+}
+
+.poderesKitDescricao {
+    display: none;
+}
+
+
+/*Exigencias e poderes do kit(final)*/
+
+
+#bioAba {
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#arquetiposKitsAba {
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#colunaKits {
+    position: relative;
+    margin-top: 10px;
+}
+
+#colunaKits::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 98%;
+    border-top: 1px solid #ddd;
+}
+
+.ql-editor {
+    text-align: justify;
+}
+
+.addKit-button {
+    margin-right: 112px;
+    color: black;
+    font-size: large;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    float: right;
+}
+
+
+
+/*Telas até HD*/
+
+@media(max-width: 1400px) {
+    .inventarioTitulo {
+        justify-content: center;
+        width: 300px;
+        margin-bottom: 10px;
+        margin-left: 50px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: x-large;
+    }
+
+    .inventarioDescricao {
+        justify-content: center;
+        height: 150px;
+        width: 300px;
+        margin-left: 50px;
+        border: transparent;
+        border-radius: 5px;
+        background-color: #ddd;
+        font-size: large
+    }
+
+    .blocoAbaixoBio {
+        display: flex;
+        margin-left: 50px;
+    }
+
+    .periciaTitulo {
+        justify-content: center;
+        width: 300px;
+        margin-bottom: 20px;
+        margin-left: 50px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: x-large;
+    }
+
+    .vantagemArquetipoTitulo,
+    .desvantagemArquetipoTitulo,
+    .exigenciaArquetipoTitulo,
+    .poderesKitTitulo {
+        width: 300px;
+        margin-bottom: 10px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: x-large;
+    }
+
+    .exigenciasKitTitulo {
+        width: 300px;
+        margin-bottom: 10px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: x-large;
+    }
+
+    .poderesKitTitulo {
+        justify-content: center;
+        width: 300px;
+        margin-bottom: 20px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: x-large;
+        display: flex;
+    }
+
+    .vantagemTitulo,
+    .desvantagemTitulo {
+        width: 180px;
+        color: black;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: x-large;
+    }
+
+    .vantagemDescricao,
+    .desvantagemDescricao {
+        height: 150px;
+        width: 250px;
+        color: color;
+        border: transparent;
+        border-radius: 5px;
+        background-color: #ddd;
+        font-size: x-large;
+        font-size: large;
+        resize: none;
+    }
+
+    .tecnicaTitulo,
+    .tecnicaRequisitos,
+    .tecnicaAlcance,
+    .tecnicaCusto,
+    .tecnicaDuracao {
+        width: 180px;
+        color: black;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: large;
+    }
+
+    .tecnicaDescricao {
+        height: 150px;
+        width: 250px;
+        color: black;
+        border: transparent;
+        border-radius: 5px;
+        background-color: #ddd;
+        font-size: large;
+        resize: none;
+        margin-top: 10px;
+        text-align: justify;
+    }
+
+    .ptsTecnicas {
+        float: right;
+        justify-content: center;
+        text-align: center;
+        width: 50px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        border-radius: 0px;
+        font-size: larger;
+        margin-bottom: 20px;
+    }
+
+    .addKit-button {
+        margin-right: 0;
+        color: black;
+        font-size: large;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        float: right;
+    }
+}
+
+/*Telas até HD (final)*/

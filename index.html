@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha de personagem</title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/Ficha-3Det-Victory/css/style.css">
+</head>
+
+<body>
+    <div class="tab container">
+        <button id="defaultOpen" class="tablinks" onclick="switchTab(event, 'bioAba')">Bio</button>
+        <button class="tablinks" onclick="switchTabAqtKit(event, 'arquetiposKitsAba')"> Arquetipos e
+            Kits</button>
+        <button class="tablinks" onclick="switchTab(event, 'vantagensAba')">Vantagens</button>
+        <button class="tablinks" onclick="switchTab(event, 'desvantagensAba')">Desvantagens</button>
+        <button class="tablinks" onclick="switchTab(event, 'tecnicasAba')">Técnicas</button>
+    </div>
+
+    <div id="bioAba" class="container tabcontent">
+        <div class="col-md-8">
+            <label class="picture" for="picture_input" tabIndex="0">
+                <span class="picture_image"></span>
+            </label>
+            <input type="file" name="picture_input" id="picture_input">
+
+            <div id="bio">
+                <div class="top-row">
+                    <input id="inputNomeBio" type="text" placeholder="Nome do personagem" value="">
+                    <span class="ptsXPTitle">PTs</span><input type="text" id="ptsBio" class="form-control ptsXP"
+                        value="">
+                    <span class="ptsXPTitle">XP</span><input type="text" id="xpBio" class="form-control ptsXP" value="">
+                </div>
+                <div class="divRecursos">
+                    <span class="input-group-text recursos">PA</span>
+                    <span class="botaoAbaixar" id="pa-min-down"><i class="bi bi-caret-left-fill"></i></span>
+                    <input type="number" class="form-control recursoInput" id="pa-min" placeholder="atual" value="">
+                    <span class="botaoAumentar" id="pa-min-up"><i class="bi bi-caret-right-fill"></i></span>
+
+                    <span class="botaoAbaixar" id="pa-max-down"><i class="bi bi-caret-left-fill"></i></span>
+                    <input type="number" class="form-control recursoInput" id="pa-max" placeholder="max" value="">
+                    <span class="botaoAumentar" id="pa-max-up"><i class="bi bi-caret-right-fill"></i></span>
+                    <div class="bar-container">
+                        <div id="pa-bar" class="bar yellow"></div>
+                    </div>
+                </div>
+                <div class="divRecursos">
+                    <span class="input-group-text recursos">PM</span>
+                    <span class="botaoAbaixar" id="pm-min-down"><i class="bi bi-caret-left-fill"></i></span>
+                    <input type="number" class="form-control recursoInput" id="pm-min" placeholder="atual" value="">
+                    <span class="botaoAumentar" id="pm-min-up"><i class="bi bi-caret-right-fill"></i></span>
+
+                    <span class="botaoAbaixar" id="pm-max-down"><i class="bi bi-caret-left-fill"></i></span>
+                    <input type="number" class="form-control recursoInput" id="pm-max" placeholder="max" value="">
+                    <span class="botaoAumentar" id="pm-max-up"><i class="bi bi-caret-right-fill"></i></span>
+                    <div class="bar-container">
+                        <div id="pm-bar" class="bar blue"></div>
+                    </div>
+                </div>
+                <div class="divRecursos">
+                    <span class="input-group-text recursos">PV</span>
+                    <span class="botaoAbaixar" id="pv-min-down"><i class="bi bi-caret-left-fill"></i></span>
+                    <input type="number" class="form-control recursoInput" id="pv-min" placeholder="atual" value="">
+                    <span class="botaoAumentar" id="pv-min-up"><i class="bi bi-caret-right-fill"></i></span>
+
+                    <span class="botaoAbaixar" id="pv-max-down"><i class="bi bi-caret-left-fill"></i></span>
+                    <input type="number" class="form-control recursoInput" id="pv-max" placeholder="max" value="">
+                    <span class="botaoAumentar" id="pv-max-up"><i class="bi bi-caret-right-fill"></i></span>
+                    <div class="bar-container">
+                        <div id="pv-bar" class="bar red"></div>
+                    </div>
+                </div>
+            </div> <br>
+            <div class="divRecursos">
+                <span id="poderRecurso" class="input-group-text poderHabRes">Poder</span>
+                <span class="botaoAbaixar" id="poder-down"><i class="bi bi-caret-left-fill"></i></span>
+                <input type="number" class="form-control recursoInput" id="poder" placeholder="0" value="0">
+                <span class="botaoAumentar" id="poder-up"><i class="bi bi-caret-right-fill"></i></span>
+                <span id="habilidadeRecurso" class="input-group-text poderHabRes">Habilidade</span>
+                <span class="botaoAbaixar" id="habilidade-down"><i class="bi bi-caret-left-fill"></i></span>
+                <input type="number" class="form-control recursoInput" id="habilidade" placeholder="0" value="0">
+                <span class="botaoAumentar" id="habilidade-up"><i class="bi bi-caret-right-fill"></i></span>
+                <span id="resistenciaRecurso" class="input-group-text poderHabRes">Resistência</span>
+                <span class="botaoAbaixar" id="resistencia-down"><i class="bi bi-caret-left-fill"></i></span>
+                <input type="number" class="form-control recursoInput" id="resistencia" placeholder="0" value="0">
+                <span class="botaoAumentar" id="resistencia-up"><i class="bi bi-caret-right-fill"></i></span>
+
+            </div> <br>
+
+            <h1>Anotações</h1>
+            <div id="editor">
+                <!--<textarea id="inputAnotacoes" type="text" placeholder="Anotações"></textarea> -->
+            </div>
+            <h1>
+                <i id="save" class="bi bi-floppy-fill" onclick="saveData()"></i>
+                <label for="load-btn"><i id="load" class="bi bi-folder-fill"></i></label>
+                <input type="file" id="load-btn" onchange="loadData()" />
+
+            </h1>
+        </div>
+
+
+        <div class="col-md-4">
+            <h1 class="blocoAbaixoBio pericia">Pericias</h1>
+            <div id="inputDivPericia">
+                <input placeholder="Pericia" type="text" id="pericia" class="periciaTitulo" value="">
+                <button class="add-button botaoInventario" onclick="addInputPericia()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+            </div>
+            <h1 class="blocoAbaixoBio">Inventário</h1>
+
+            <div id="inputDivInventario">
+                <input placeholder="Título" type="text" id="inventarioTitulo" class="inventarioTitulo" value="">
+                <button class="add-button botaoInventario" onclick="addInputInventario()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <textarea placeholder="Descrição" id="inventarioDescricao" class="inventarioDescricao"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="arquetiposKitsAba" class="tabcontent container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Arquetipo</h1>
+                <div id="poderesArquetipoKit">
+                    <div class="top-row">
+                        <input type="text" id="arquetipoNome" class="arquetipoPoderesKitTitulo"
+                            placeholder="Nome do arquetipo">
+                        <input type="text" id="ptsTituloArquetipo" class="arquetipoPoderesKitTitulo" placeholder="PTs">
+                    </div>
+                    <h1>Descrição</h1>
+                </div>
+                <div id="editor2">
+                    <!--<textarea placeholder="Descrição" class="arquetipoPoderesKitDescricao"></textarea>-->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="inputDivVantagemArquetipo">
+                    <h1 class="vantagemArquetipo ">Vantagens </h1>
+                    <div class="vantagemArquetipoContainer">
+                        <input placeholder="Titulo" type="text" id="vantagemArquetipo" class="vantagemArquetipoTitulo">
+                        <button class="add-button" onclick="addInputVantagemArquetipo()"><i
+                                class="bi bi-plus-circle"></i></button>
+                    </div>
+                </div>
+
+                <div id="inputDivDesvantagemArquetipo">
+                    <h1 class="desvantagemArquetipo">Desvantagens</h1>
+                    <div class="vantagemArquetipoContainer">
+                        <input placeholder="Titulo" type="text" id="desvantagemArquetipo" class="desvantagemArquetipoTitulo">
+                        <button class="add-button" onclick="addInputDesvantagemArquetipo()"><i
+                                class="bi bi-plus-circle"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="colunaKits" class="row">
+            <div class="col-md-8">
+                <div id="inputDivKits">
+                    <button class="addKit-button" onclick="addInputKits()"><i class="bi bi-plus-circle"></i></button>
+                    <div class="kitButton">
+                        <h1>
+                            Kits
+                        </h1>
+
+                    </div>
+                    <div id="poderesArquetipoKit">
+                        <div class="top-row">
+                            <input type="text" id="kitFixoNome" class="arquetipoPoderesKitTitulo" placeholder="Nome do kit">
+                            <input type="text" id="ptsTituloKit" class="arquetipoPoderesKitTitulo" placeholder="PTs">
+                        </div>
+                        <h1>Descrição</h1>
+                    </div>
+                    <div id="editorKit1">
+                        <!--<textarea placeholder="Descrição" class="arquetipoPoderesKitDescricao"></textarea>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="inputDivExigencias">
+                    <h1 class="vantagemArquetipo ">Exigências</h1>
+                    <div class="exigenciasKitContainer">
+                        <input placeholder="Titulo" id="exigenciaArquetipo" type="text" class="exigenciaArquetipoTitulo">
+                        <button class="add-button botaoInventario" onclick="addInputExigencias()"><i
+                                class="bi bi-plus-circle"></i></button>
+                    </div>
+                </div>
+
+                <div id="inputDivPoderes">
+                    <h1 class="desvantagemArquetipo">Poderes</h1>
+                    <div class="poderesKitContainer">
+                        <input placeholder="Titulo" type="text" id="poderKits" class="poderesKitTitulo">
+                        <button class="add-button botaoInventario" onclick="addInputPoderes()"><i
+                                class="bi bi-plus-circle"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="vantagensAba" class="tabcontent container">
+        <div id="inputDivVantagem1">
+            <div class="divVantagens">
+                <input type="text" placeholder="Vantagens" id="vantagem1" class="vantagemTitulo">
+                <button class="add-button" onclick="addInputVantagem1()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsVantagem" placeholder="PTs">
+                <textarea placeholder="Descrição" id="vantagemDescricao1" class="vantagemDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivVantagem2">
+            <div class="divVantagens">
+                <input type="text" placeholder="Vantagens" id="vantagem2" class="vantagemTitulo">
+                <button class="add-button" onclick="addInputVantagem2()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsVantagem" placeholder="PTs">
+                <textarea placeholder="Descrição" id="vantagemDescricao2" class="vantagemDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivVantagem3">
+            <div class="divVantagens">
+                <input type="text" placeholder="Vantagens" id="vantagem3" class="vantagemTitulo">
+                <button class="add-button" onclick="addInputVantagem3()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsVantagem" placeholder="PTs">
+                <textarea placeholder="Descrição" id="vantagemDescricao3" class="vantagemDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivVantagem4">
+            <div class="divVantagens">
+                <input type="text" placeholder="Vantagens" id="vantagem4" class="vantagemTitulo">
+                <button class="add-button" onclick="addInputVantagem4()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsVantagem" placeholder="PTs">
+                <textarea placeholder="Descrição" id="vantagemDescricao4" class="vantagemDescricao"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="desvantagensAba" class="tabcontent container">
+        <div id="inputDivDesvantagem1">
+            <div class="divDesvantagens">
+                <input type="text" placeholder="Desvantagens" class="desvantagemTitulo">
+                <button class="add-button" onclick="addInputDesvantagem1()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsDesvantagem" placeholder="PTs">
+                <textarea placeholder="Descrição" class="desvantagemDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivDesvantagem2">
+            <div class="divDesvantagens">
+                <input type="text" placeholder="Desvantagens" class="desvantagemTitulo">
+                <button class="add-button" onclick="addInputDesvantagem2()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsDesvantagem" placeholder="PTs">
+                <textarea placeholder="Descrição" class="desvantagemDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivDesvantagem3">
+            <div class="divDesvantagens">
+                <input type="text" placeholder="Desvantagens" class="desvantagemTitulo">
+                <button class="add-button" onclick="addInputDesvantagem3()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsDesvantagem" placeholder="PTs">
+                <textarea placeholder="Descrição" class="desvantagemDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivDesvantagem4">
+            <div class="divDesvantagens">
+                <input type="text" placeholder="Desvantagens" class="desvantagemTitulo">
+                <button class="add-button" onclick="addInputDesvantagem4()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsDesvantagem" placeholder="PTs">
+                <textarea placeholder="Descrição" class="desvantagemDescricao"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="tecnicasAba" class="tabcontent container">
+        <div id="inputDivTecnicas1">
+            <div class="divTecnicas">
+                <input type="text" placeholder="Tecnicas" class="tecnicaTitulo">
+                <button class="add-button" onclick="addInputTecnica1()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsTecnicas" placeholder="Nivel">
+                <input type="text" placeholder="Requisitos" class="tecnicaRequisitos">
+                <input type="text" placeholder="Alcance" class="tecnicaAlcance">
+                <input type="text" placeholder="Custo" class="tecnicaCusto">
+                <input type="text" placeholder="Duração" class="tecnicaDuracao">
+                <textarea placeholder="Descrição" class="tecnicaDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivTecnicas2">
+            <div class="divTecnicas">
+                <input type="text" placeholder="Tecnicas" class="tecnicaTitulo">
+                <button class="add-button" onclick="addInputTecnica2()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsTecnicas" placeholder="Nivel">
+                <input type="text" placeholder="Requisitos" class="tecnicaRequisitos">
+                <input type="text" placeholder="Alcance" class="tecnicaAlcance">
+                <input type="text" placeholder="Custo" class="tecnicaCusto">
+                <input type="text" placeholder="Duração" class="tecnicaDuracao">
+                <textarea placeholder="Descrição" class="tecnicaDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivTecnicas3">
+            <div class="divTecnicas">
+                <input type="text" placeholder="Tecnicas" class="tecnicaTitulo">
+                <button class="add-button" onclick="addInputTecnica3()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsTecnicas" placeholder="Nivel">
+                <input type="text" placeholder="Requisitos" class="tecnicaRequisitos">
+                <input type="text" placeholder="Alcance" class="tecnicaAlcance">
+                <input type="text" placeholder="Custo" class="tecnicaCusto">
+                <input type="text" placeholder="Duração" class="tecnicaDuracao">
+                <textarea placeholder="Descrição" class="tecnicaDescricao"></textarea>
+            </div>
+        </div>
+        <div id="inputDivTecnicas4">
+            <div class="divTecnicas">
+                <input type="text" placeholder="Tecnicas" class="tecnicaTitulo">
+                <button class="add-button" onclick="addInputTecnica4()">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+                <input type="text" class=" ptsTecnicas" placeholder="Nivel">
+                <input type="text" placeholder="Requisitos" class="tecnicaRequisitos">
+                <input type="text" placeholder="Alcance" class="tecnicaAlcance">
+                <input type="text" placeholder="Custo" class="tecnicaCusto">
+                <input type="text" placeholder="Duração" class="tecnicaDuracao">
+                <textarea placeholder="Descrição" class="tecnicaDescricao"></textarea>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="/Ficha-3Det-Victory/saveLoad.js"></script>
+    <script src="/Ficha-3Det-Victory/script.js"></script>
+</body>
+
+</html>
