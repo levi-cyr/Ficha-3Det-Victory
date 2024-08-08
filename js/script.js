@@ -518,6 +518,7 @@ const quill2 = new Quill('#editor2', {
     theme: 'snow'
 });
 
-const quill3 = new Quill('#editor3', {
+/*const quill3 = new Quill('#editor3', {
     theme: 'snow'
 });
+*/
