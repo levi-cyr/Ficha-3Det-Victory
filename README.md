@@ -6,4 +6,5 @@ O projeto é feito com interesse em facilitar e organizar a jogatina para narrad
 Sinta-se livre para doar e avisar sobre bugs caso goste do projeto. A depender de como vai ser recebido, futuramente ele será expandido e melhorado.
 
 Chave pix: 781c9daf-b19f-47ba-84b0-40bfd6953b98
+
 Discord para contato: levicy, sovios
