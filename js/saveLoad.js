@@ -301,8 +301,10 @@ function loadData() {
     reader.onloadend = function () {
         const load = JSON.parse(reader.result)
 
+        pictureData = load.fotoPersonagem || localStorage.getItem("pictureData")
+
         const bioData = load.bio
-        const pictureData = load.fotoPersonagem;
+        //const pictureData = load.fotoPersonagem; //antigo
         const arquetipoData = load.arquetipoKit
         const vantagens1 = load.vantagens1
         const vantagens2 = load.vantagens2
@@ -334,7 +336,10 @@ function loadData() {
         currentIndex++
 
         periciasAdicionadas.forEach(periciaTitulo => {
-            addPericiaField("#inputDivPericia", "pericia")
+            //addPericiaField("#inputDivPericia", "pericia") //antigo
+            if(periciaTitulo.trim() !== "") {
+                addPericiaField("#inputDivPericia", "pericia")
+            }
             const periciaElements = periciaContainer.querySelectorAll(".periciaContainer .periciaTitulo")
             if (periciaElements.length > 0) {
                 periciaElements[periciaElements.length - 1].value = periciaTitulo
@@ -389,12 +394,22 @@ function loadData() {
             document.getElementById("vantagemArquetipo").value = arquetipoData[3]
             const vantagensAdicionadas = arquetipoData[4].split(", ")
             vantagensAdicionadas.forEach(vantagemTitulo => {
-                const container = document.querySelector("#inputDivVantagemArquetipo")
+                /*const container = document.querySelector("#inputDivVantagemArquetipo")
                 if (container) {
                     addInputField("#inputDivVantagemArquetipo", "vantagemArquetipo")
                     const vantagemElements = container.querySelectorAll(".vantagemArquetipoTitulo")
                     if (vantagemElements.length > 0) {
                         vantagemElements[vantagemElements.length - 1].value = vantagemTitulo
+                    }
+                } */ //antigo
+                if(vantagemTitulo.trim() !== "") {
+                    const container = document.querySelector("#inputDivVantagemArquetipo")
+                    if (container) {
+                        addInputField("#inputDivVantagemArquetipo", "vantagemArquetipo")
+                        const vantagemElements = container.querySelectorAll(".vantagemArquetipoTitulo")
+                        if (vantagemElements.length > 0) {
+                            vantagemElements[vantagemElements.length - 1].value = vantagemTitulo
+                        }
                     }
                 }
             });
@@ -402,12 +417,22 @@ function loadData() {
             document.getElementById("desvantagemArquetipo").value = arquetipoData[5];
             const desvantagensAdicionadas = arquetipoData[6].split(", ");
             desvantagensAdicionadas.forEach(desvantagemTitulo => {
-                const container = document.querySelector("#inputDivDesvantagemArquetipo");
+                /*const container = document.querySelector("#inputDivDesvantagemArquetipo");
                 if (container) {
                     addInputField("#inputDivDesvantagemArquetipo", "desvantagemArquetipo");
                     const desvantagemElements = container.querySelectorAll(".desvantagemArquetipoTitulo");
                     if (desvantagemElements.length > 0) {
                         desvantagemElements[desvantagemElements.length - 1].value = desvantagemTitulo;
+                    }
+                } */ //antigo
+                if(desvantagemTitulo.trim() !== "") {
+                    const container = document.querySelector("#inputDivDesvantagemArquetipo");
+                    if (container) {
+                        addInputField("#inputDivDesvantagemArquetipo", "desvantagemArquetipo");
+                        const desvantagemElements = container.querySelectorAll(".desvantagemArquetipoTitulo");
+                        if (desvantagemElements.length > 0) {
+                            desvantagemElements[desvantagemElements.length - 1].value = desvantagemTitulo;
+                        }
                     }
                 }
             });
@@ -442,12 +467,22 @@ function loadData() {
             document.getElementById("exigenciaArquetipo").value = arquetipoData[11]
             const exigenciasAdicionadas = arquetipoData[12].split(", ")
             exigenciasAdicionadas.forEach(exigenciaTitulo => {
-                const container = document.querySelector("#inputDivExigencias")
+                /*const container = document.querySelector("#inputDivExigencias")
                 if (container) {
                     addInputExigencias();
                     const exigenciaElements = container.querySelectorAll(".exigenciasKitTitulo")
                     if (exigenciaElements.length > 0) {
                         exigenciaElements[exigenciaElements.length - 1].value = exigenciaTitulo
+                    }
+                }*/ //antigo
+                if(exigenciaTitulo.trim() !== "") {
+                    const container = document.querySelector("#inputDivExigencias")
+                    if (container) {
+                        addInputExigencias();
+                        const exigenciaElements = container.querySelectorAll(".exigenciasKitTitulo")
+                        if (exigenciaElements.length > 0) {
+                            exigenciaElements[exigenciaElements.length - 1].value = exigenciaTitulo
+                        }
                     }
                 }
             })
@@ -455,12 +490,22 @@ function loadData() {
             document.getElementById("poderKits").value = arquetipoData[13]
             const poderesAdicionados = arquetipoData[14].split(", ")
             poderesAdicionados.forEach(poderTitulo => {
-                const container = document.querySelector("#inputDivPoderes")
+                /*const container = document.querySelector("#inputDivPoderes")
                 if (container) {
                     addInputPoderes();
                     const poderElements = container.querySelectorAll(".poderesKitTitulo")
                     if (poderElements.length > 0) {
                         poderElements[poderElements.length - 1].value = poderTitulo
+                    }
+                }*/ //antigo
+                if(poderTitulo.trim() !== "") {
+                    const container = document.querySelector("#inputDivPoderes")
+                    if (container) {
+                        addInputPoderes();
+                        const poderElements = container.querySelectorAll(".poderesKitTitulo")
+                        if (poderElements.length > 0) {
+                            poderElements[poderElements.length - 1].value = poderTitulo
+                        }
                     }
                 }
             })
