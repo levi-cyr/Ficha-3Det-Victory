@@ -51,7 +51,7 @@ body {
     border-color: black;
     color: black;
     background: #eee;
-    cursor: url("/cursor/LINKSELECT.cur"), pointer;
+    /*cursor: url("/cursor/LINKSELECT.cur"), pointer;*/
 }
 
 .picture:focus {
