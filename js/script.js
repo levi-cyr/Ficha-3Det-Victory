@@ -18,6 +18,7 @@ inputFile.addEventListener("change", function (e) {
             pictureImage.innerHTML = ""
             pictureImage.appendChild(img)
             pictureData = readerTarget.result;
+            localStorage.setItem("pictureData", pictureData);
         });
         reader.readAsDataURL(file)
     }
@@ -51,6 +52,12 @@ document.addEventListener('DOMContentLoaded', function () {
         updateBar(minInput, maxInput, bar)
     }
 
+    function incrementValueNoBarUpdate(inputId) {
+        const input = document.getElementById(inputId)
+        let value = parseInt(input.value, 10) || 0
+        input.value = value + 1
+    }
+
     function decrementValue(inputId, bar, minInput, maxInput) {
         const input = document.getElementById(inputId)
         let value = parseInt(input.value, 10) || 0
@@ -58,6 +65,14 @@ document.addEventListener('DOMContentLoaded', function () {
             input.value = value - 1
         }
         updateBar(minInput, maxInput, bar)
+    }
+
+    function decrementValueNoBarUpdate(inputId) {
+        const input = document.getElementById(inputId)
+        let value = parseInt(input.value, 10) || 0
+        if (value > 0) {
+            input.value = value - 1
+        }
     }
 
     document.getElementById('pa-min-up').addEventListener('click', function () {
@@ -109,27 +124,27 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     document.getElementById('poder-up').addEventListener('click', function () {
-        incrementValue('poder')
+        incrementValueNoBarUpdate('poder')
     })
 
     document.getElementById('poder-down').addEventListener('click', function () {
-        decrementValue('poder')
+        decrementValueNoBarUpdate('poder')
     })
 
     document.getElementById('habilidade-up').addEventListener('click', function () {
-        incrementValue('habilidade')
+        incrementValueNoBarUpdate('habilidade')
     })
 
     document.getElementById('habilidade-down').addEventListener('click', function () {
-        decrementValue('habilidade')
+        decrementValueNoBarUpdate('habilidade')
     })
 
     document.getElementById('resistencia-up').addEventListener('click', function () {
-        incrementValue('resistencia')
+        incrementValueNoBarUpdate('resistencia')
     })
 
     document.getElementById('resistencia-down').addEventListener('click', function () {
-        decrementValue('resistencia')
+        decrementValueNoBarUpdate('resistencia')
     })
 
     paMinInput.addEventListener("input", () => updateBar(paMinInput, paMaxInput, paBar))
@@ -269,7 +284,7 @@ function addInputField(containerSelector, className) {
     removeButton.className = "add-button"
     removeButton.onclick = function () {
         divContainer.remove()
-        adjustInventarioIds(); 
+        adjustInventarioIds();
     };
     removeButton.innerHTML = "<i class='bi bi-dash-circle'></i>"
 
@@ -295,7 +310,7 @@ function adjustInventarioIds() {
         }
     });
 
-    nextInventarioId = inventarioContainers.length + 1; 
+    nextInventarioId = inventarioContainers.length + 1;
 }
 
 function addCampoVantagem(containerSelector, className) {
@@ -411,7 +426,7 @@ function addCampoTecnica(containerSelector, className) {
     document.querySelector(containerSelector).appendChild(divContainer)
 }
 
-let nextPericiaId = 1; 
+let nextPericiaId = 1;
 
 function addPericiaField(containerSelector, className) {
     const divContainer = document.createElement("div")
@@ -522,3 +537,497 @@ const quill2 = new Quill('#editor2', {
     theme: 'snow'
 });
 */
+
+function closePopUp() {
+    popup.classList.remove("showPopup")
+}
+
+function rolarDadoPoder() {
+    let numDados = 1  
+    let somaDados = 0
+    let dadoPoder = []
+    let criticos = 0 
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoPoder.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let poder = parseInt(document.getElementById("poder").value) 
+    let somaFinal = somaDados + (criticos * poder) + poder
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    
+    let resultadoFormatado = dadoPoder.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(poder).join(" + ")
+    }
+
+    if (dadoPoder.includes(1)) {
+        popup.innerHTML = poder + " + " + numDados + "d6" + " = " + poder + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = poder + " + " + numDados + "d6" + " = " + poder + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = poder + " + " + numDados + "d6" + " = " + poder + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual = poder + " + " + numDados + "d6" + " = " + poder + " + " + "(" + resultadoFormatado + ")"
+        + criticoTexto
+
+    const historicoDado = document.getElementById("historicoDado")
+
+    historicoDado.innerHTML += "<h6 id='poderTituloDado'>" + "Poder" + "</h6>" +"<p class='paragrafoHistoricoDado'>" + resultadoAtual + "<span class='paragrafoHistoricoDado'>" + " Rolagem: " + somaFinal + "</span>" + "</p>"
+}
+
+function clearHistory() {
+    historicoDado.innerHTML = ""
+}
+
+function dontClose(event) {
+    event.stopPropagation();
+}
+
+function rolarDadoPoder2() {
+    let numDados = 2  
+    let somaDados = 0
+    let dadoPoder = []
+    let criticos = 0 
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoPoder.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let poder2 = parseInt(document.getElementById("poder").value)
+    let somaFinal = somaDados + (criticos * poder2) + poder2
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    let resultadoFormatado = dadoPoder.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(poder2).join(" + ")
+    }
+
+    if (dadoPoder.includes(1)) {
+        popup.innerHTML = poder2 + " + " + numDados + "d6" + " = " + poder2 + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = poder2 + " + " + numDados + "d6" + " = " + poder2 + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = poder2 + " + " + numDados + "d6" + " = " + poder2 + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual2 = poder2 + " + " + numDados + "d6" + " = " + poder2 + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " " + "Rolagem: " + somaFinal
+
+    historicoDado.innerHTML += "<h6 id='poderTituloDado'>" + "Poder" + "</h6>" + "<p>" + resultadoAtual2 + "</p>"
+}
+
+function rolarDadoPoder3() {
+    let numDados = 3  
+    let somaDados = 0
+    let dadoPoder = []
+    let criticos = 0 
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoPoder.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let poder = parseInt(document.getElementById("poder").value) 
+    let somaFinal = somaDados + (criticos * poder) + poder
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    let resultadoFormatado = dadoPoder.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(poder).join(" + ")
+    }
+
+    if (dadoPoder.includes(1)) {
+        popup.innerHTML = poder + " + " + numDados + "d6" + " = " + poder + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = poder + " + " + numDados + "d6" + " = " + poder + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = poder + " + " + numDados + "d6" + " = " + poder + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual3 = poder + " + " + numDados + "d6" + " = " + poder + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " " + "Rolagem: " + somaFinal
+
+    historicoDado.innerHTML += "<h6 id='poderTituloDado'>" + "Poder" + "</h6>" + "<p>" + resultadoAtual3 + "</p>"
+}
+
+function rolarDadoHabilidade() {
+    let numDados = 1
+    let somaDados = 0
+    let dadoHabilidade = []
+    let criticos = 0 
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoHabilidade.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let habilidade = parseInt(document.getElementById("habilidade").value) 
+    let somaFinal = somaDados + (criticos * habilidade) + habilidade
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    
+    let resultadoFormatado = dadoHabilidade.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(habilidade).join(" + ")
+    }
+
+    if (dadoHabilidade.includes(1)) {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")"
+        + criticoTexto
+
+    const historicoDado = document.getElementById("historicoDado")
+
+    historicoDado.innerHTML += "<h6 id='habilidadeTituloDado'>" + "Habilidade" + "</h6>" + "<p class='paragrafoHistoricoDado'>" + resultadoAtual + "<span class='paragrafoHistoricoDado'>" + " Rolagem: " + somaFinal + "</span>" + "</p>"
+}
+
+function rolarDadoHabilidade2() {
+    let numDados = 2
+    let somaDados = 0
+    let dadoHabilidade = []
+    let criticos = 0 
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoHabilidade.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let habilidade = parseInt(document.getElementById("habilidade").value) 
+    let somaFinal = somaDados + (criticos * habilidade) + habilidade
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    let resultadoFormatado = dadoHabilidade.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(habilidade).join(" + ")
+    }
+
+    if (dadoHabilidade.includes(1)) {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")"
+        + criticoTexto
+
+    const historicoDado = document.getElementById("historicoDado")
+
+    historicoDado.innerHTML += "<h6 id='habilidadeTituloDado'>" + "Habilidade" + "</h6>" + "<p class='paragrafoHistoricoDado'>" + resultadoAtual + "<span class='paragrafoHistoricoDado'>" + " Rolagem: " + somaFinal + "</span>" + "</p>"
+}
+
+function rolarDadoHabilidade3() {
+    let numDados = 3
+    let somaDados = 0
+    let dadoHabilidade = []
+    let criticos = 0  
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoHabilidade.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let habilidade = parseInt(document.getElementById("habilidade").value) 
+    let somaFinal = somaDados + (criticos * habilidade) + habilidade
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    let resultadoFormatado = dadoHabilidade.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(habilidade).join(" + ")
+    }
+
+    if (dadoHabilidade.includes(1)) {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual = habilidade + " + " + numDados + "d6" + " = " + habilidade + " + " + "(" + resultadoFormatado + ")"
+        + criticoTexto
+
+    const historicoDado = document.getElementById("historicoDado")
+
+    historicoDado.innerHTML += "<h6 id='habilidadeTituloDado'>" + "Habilidade" + "</h6>" +"<p class='paragrafoHistoricoDado'>" + resultadoAtual + "<span class='paragrafoHistoricoDado'>" + " Rolagem: " + somaFinal + "</span>" + "</p>"
+}
+
+function rolarDadoResistencia() {
+    let numDados = 1
+    let somaDados = 0
+    let dadoResistencia = []
+    let criticos = 0
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoResistencia.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let resistencia = parseInt(document.getElementById("resistencia").value) 
+    let somaFinal = somaDados + (criticos * resistencia) + resistencia
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    let resultadoFormatado = dadoResistencia.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(resistencia).join(" + ")
+    }
+
+    if (dadoResistencia.includes(1)) {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")"
+        + criticoTexto
+
+    const historicoDado = document.getElementById("historicoDado")
+
+    historicoDado.innerHTML += "<h6 id='resistenciaTituloDado'>" + "Resistência" + "</h6>" +"<p class='paragrafoHistoricoDado'>" + resultadoAtual + "<span class='paragrafoHistoricoDado'>" + " Rolagem: " + somaFinal + "</span>" + "</p>"
+}
+
+function rolarDadoResistencia2() {
+    let numDados = 2
+    let somaDados = 0
+    let dadoResistencia = []
+    let criticos = 0 
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoResistencia.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let resistencia = parseInt(document.getElementById("resistencia").value) 
+    let somaFinal = somaDados + (criticos * resistencia) + resistencia
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    let resultadoFormatado = dadoResistencia.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(resistencia).join(" + ")
+    }
+
+    if (dadoResistencia.includes(1)) {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")"
+        + criticoTexto
+
+    const historicoDado = document.getElementById("historicoDado")
+
+    historicoDado.innerHTML += "<h6 id='resistenciaTituloDado'>" + "Resistência" + "<p class='paragrafoHistoricoDado'>" + resultadoAtual + "<span class='paragrafoHistoricoDado'>" + " Rolagem: " + somaFinal + "</span>" + "</p>"
+}
+
+function rolarDadoResistencia3() {
+    let numDados = 3
+    let somaDados = 0
+    let dadoResistencia = []
+    let criticos = 0 
+
+    for (let i = 0; i < numDados; i++) {
+        let resultadoDado = Math.floor(Math.random() * 6) + 1
+        dadoResistencia.push(resultadoDado)
+        somaDados += resultadoDado
+
+        if (resultadoDado === 6) {
+            criticos++
+        }
+    }
+
+    let resistencia = parseInt(document.getElementById("resistencia").value) 
+    let somaFinal = somaDados + (criticos * resistencia) + resistencia
+
+    if (!popup.classList.contains("showPopup")) {
+        popup.classList.toggle("showPopup")
+    }
+
+    let resultadoFormatado = dadoResistencia.map(dado => {
+        if (dado === 6) {
+            return `<span id='popupCritico'>${dado}</span>`
+        } else if (dado === 1) {
+            return `<span id='popupFalhaCritica'>${dado}</span>`
+        } else {
+            return dado
+        }
+    }).join(" + ")
+
+    let criticoTexto = ""
+    if (criticos > 0) {
+        criticoTexto = " + " + Array(criticos).fill(resistencia).join(" + ")
+    }
+
+    if (dadoResistencia.includes(1)) {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else if (criticos > 0) {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + criticoTexto + " | " + "Rolagem: " + somaFinal
+    } else {
+        popup.innerHTML = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")" + " | " + "Rolagem: " + somaFinal
+    }
+
+    let resultadoAtual = resistencia + " + " + numDados + "d6" + " = " + resistencia + " + " + "(" + resultadoFormatado + ")"
+        + criticoTexto
+
+    const historicoDado = document.getElementById("historicoDado")
+
+    historicoDado.innerHTML += "<h6 id='resistenciaTituloDado'>" + "Resistência" + "<p class='paragrafoHistoricoDado'>" + resultadoAtual + "<span class='paragrafoHistoricoDado'>" + " Rolagem: " + somaFinal + "</span>" + "</p>"
+}
